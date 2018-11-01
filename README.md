@@ -1,5 +1,5 @@
 # Network_Project
-Network Project of CS2019 ASU
+Network Project of CSE 2019 ASU
 
 Team Members:
 
