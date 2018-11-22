@@ -9,13 +9,13 @@ with open('input.txt', 'r') as file:
     for i in range(len(lines)/2):
         if len(lines[i]) < 1:
             continue
-        message = lines[i]
-        generator = lines[i+1]
+        message = lines[i].strip()
+        generator = lines[i+1].strip()
         output_message = concatenation(message, generator)
-        print("the result of generator is {}".format(output))
+        print("the result of generator is {} \n".format(output_message))
         verify = verifier(message=output_message, plynomial=generator)
         if verify:
-            print("result of verify is correct and the message is {}".format(verify))
+            print("result of verify is correct and the message is {} \n".format(verify))
             output.write(output_message)
             output.write("\n message is correct \n \n")
         else:
@@ -27,9 +27,9 @@ with open('input.txt', 'r') as file:
             new_message = alter(output_message, 3)
 
         verify = verifier(message=new_message, plynomial=generator)
-        print(verify)
+        print("the recived message after alter is {} \n".format(new_message))
         if verify:
-            print("result of verify is correct and the message is {}".format(verify))
+            print("result of verify is not correct")
         else:
             print("wrong message")
             output.write(new_message)

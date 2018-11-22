@@ -13,7 +13,7 @@ def division(data,divisor):
     """ Modulo 2 Division to get reminder """
 
     size = len(divisor)
-    y = data[0:size]
+    y = data[:size]
     while size < len(data):
         if y[0] == '1':
             y = xor (divisor,y) + data[size]
@@ -24,7 +24,7 @@ def division(data,divisor):
         y = xor (divisor,y)
     else:
         y = xor ('0'*size,y)
-
+    
     return y
 
 def concatenation(message, generator):
@@ -33,6 +33,6 @@ def concatenation(message, generator):
     x = len(generator)
     data = message + '0'*(x-1)
     reminder = division(data,generator)
-    transmitted_data = message + reminder
-
-    return transmitted_data
+    d = [message , reminder]
+    transmitted_data = "".join(d)
+    return transmitted_data.replace('\n', '')

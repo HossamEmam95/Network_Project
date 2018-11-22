@@ -26,4 +26,4 @@ def verifier(message, plynomial):
         return ("{}".format(message[:iteraions]))
 
 
-print(verifier("111001010100", "11011"))
+# print(verifier("111001010100", "11011"))
