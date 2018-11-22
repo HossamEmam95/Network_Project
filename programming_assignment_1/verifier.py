@@ -22,7 +22,7 @@ def verifier(message, plynomial):
     # check if the remainder contains 1's
     # for i in range(m):
     #     if remainder[i] != 0:
-    if 1 in remainder:
+    if '1' in remainder:
         return "message is not correct!"
     else:
         return ("the transmitted message: {}".format(message[0:iteraions]))
