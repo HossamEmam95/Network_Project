@@ -1,6 +1,11 @@
-10011101
-1001
-1101011111
-10011
-11100110
-11001
+Test_case_1:
+Message : 10011101
+Generator : 1001
+
+Test_case_2:
+Message : 1101011111
+Generator : 10011
+
+Test_case_3:
+Message : 11100110
+Generator : 11001
