@@ -1,5 +1,3 @@
-
-
 def verifier(message, plynomial):
     """long divion to verifiy if the message is correct or not"""
     remainder = list(message)              # it can be also achieved using message[:]
@@ -25,7 +23,7 @@ def verifier(message, plynomial):
     if '1' in remainder:
         return "message is not correct!"
     else:
-        return ("the transmitted message: {}".format(message[0:iteraions]))
+        return ("{}".format(message[:iteraions]))
 
 
 print(verifier("111001010100", "11011"))
