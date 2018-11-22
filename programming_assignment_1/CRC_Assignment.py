@@ -28,6 +28,7 @@ with open('input.txt', 'r') as file:
 
         verify = verifier(message=new_message, plynomial=generator)
         print("the recived message after alter is {} \n".format(new_message))
+        
         if verify:
             print("result of verify is not correct")
         else:

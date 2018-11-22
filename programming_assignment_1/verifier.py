@@ -21,7 +21,7 @@ def verifier(message, plynomial):
     # for i in range(m):
     #     if remainder[i] != 0:
     if '1' in remainder:
-        return "message is not correct!"
+        return False
     else:
         return ("{}".format(message[:iteraions]))
 
