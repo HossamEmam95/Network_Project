@@ -1,4 +1,4 @@
-def alter(generated_message: str, index: int) -> str:
+def alter(generated_message, index):
     """
        Return the input genrated_message after inverting the indexed character
        args:
