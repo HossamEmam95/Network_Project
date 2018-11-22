@@ -6,7 +6,7 @@ output = open('transmitted_message.txt', 'w')
 
 with open('input.txt', 'r') as file:
     lines = file.readlines()
-    for i in range(len(lines)/2):
+    for i in range(0, len(lines), 2):
         if len(lines[i]) < 1:
             continue
         message = lines[i].strip()
@@ -28,10 +28,12 @@ with open('input.txt', 'r') as file:
 
         verify = verifier(message=new_message, plynomial=generator)
         print("the recived message after alter is {} \n".format(new_message))
-        
+
         if verify:
             print("result of verify is not correct")
         else:
-            print("wrong message")
+            print("wrong message \n")
+
             output.write(new_message)
             output.write("\n message is not correct \n \n")
+        print('-------------------------------------------------------------')

@@ -1,6 +1,18 @@
 10011101100
  message is correct 
  
-11011101100
+10111101100
+ message is not correct 
+ 
+11010111110010
+ message is correct 
+ 
+11110111110010
+ message is not correct 
+ 
+111001100110
+ message is correct 
+ 
+101001100110
  message is not correct 
  
