@@ -30,8 +30,3 @@ def concatenation (message,generator):
     transmitted_data = message + reminder
 
     return transmitted_data
-
-p = "1101011111001"
-t = "10011"
-u = concatenation(p,t)
-print(u)
