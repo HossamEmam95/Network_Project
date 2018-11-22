@@ -1,24 +1,42 @@
-Transmitted_message of test case 1 :
-
 10011101100
  message is correct 
  
-10111101100
+10001101100
  message is not correct 
  
- Transmitted_message of test case 2 :
-
 11010111110010
  message is correct 
  
-11110111110010
+11000111110010
  message is not correct 
  
-Transmitted_message of test case 3 : 
-
 111001100110
  message is correct 
  
-101001100110
+111101100110
+ message is not correct 
+ 
+11111111110000001111111111
+ message is correct 
+ 
+11101111110000001111111111
+ message is not correct 
+ 
+1010101010101011010111010101111111
+ message is correct 
+ 
+1011101010101011010111010101111111
+ message is not correct 
+ 
+1111000100101010101010010100100
+ message is correct 
+ 
+1110000100101010101010010100100
+ message is not correct 
+ 
+101010101010101010111001
+ message is correct 
+ 
+101110101010101010111001
  message is not correct 
  
