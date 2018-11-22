@@ -1,15 +1,21 @@
+Transmitted_message of test case 1 :
+
 10011101100
  message is correct 
  
 10111101100
  message is not correct 
  
+ Transmitted_message of test case 2 :
+
 11010111110010
  message is correct 
  
 11110111110010
  message is not correct 
  
+Transmitted_message of test case 3 : 
+
 111001100110
  message is correct 
  
