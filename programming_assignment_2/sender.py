@@ -20,7 +20,7 @@ class Sender:
         self.w = win_size
         self.t = timeout
         self.n = num_packets
-        self.filename = "sample.txt"
+        self.filename = "input.txt"
         self.cur_seq = 0
         self.active_spaces = self.w
         self.window = win_size * [None]
@@ -28,7 +28,7 @@ class Sender:
         self.last_sent_seqnum = -1
         self.last_ack_seqnum = -1
         self.logfile = ''
-        
+
     def canAdd(self):  # check if a packet can be added to the send window
         if self.active_spaces == 0:
             return False
@@ -57,9 +57,9 @@ class Sender:
                 time.time()) + "\t" + str(self.window[cur_num].split('/////')[1]) + "Re-sending\n")
             time.sleep(1.4)
             temp = self.window[cur_num].split('/////')
-            self.window[cur_num] = temp[0] + '/////' + temp[1] + '/////' + temp[2] + '/////' + temp[3] + '/////' + str(random.randint(70,100)) 
+            self.window[cur_num] = temp[0] + '/////' + temp[1] + '/////' + temp[2] + '/////' + temp[3] + '/////' + str(random.randint(70,100))
             print self.window[cur_num].split('/////')
-            
+
             conn.send(self.window[cur_num])
             cur_num += 1
 
@@ -70,7 +70,7 @@ class Sender:
         prob = random.randint(0, 100)
         packet = str(file_check_sum) + '/////' + str(sequence_number) + \
                      '/////' + str(pack_size) + '/////' + \
-                                   str(pac) + '/////' + str(prob) 
+                                   str(pac) + '/////' + str(prob)
         return packet
 
     def divide(self, data, num):  # create packets from datas
@@ -145,9 +145,9 @@ class Sender:
 
 
 
-win = raw_input("Enter window size: ")
-numpac = raw_input("Enter the number of packets: ")
-tim = raw_input("Enter the timeout: ")
+win = 4
+numpac = 8
+tim = 2
 server=Sender(int(win), float(tim), int(numpac))
 server.soc.bind((host, port))
 server.soc.listen(5)
