@@ -157,7 +157,8 @@ class Sender:
 win = 4
 numpac = 8
 tim = 1
-non_ack = raw_input("enter the packet number you want to send non awk on it: ")
+# non_ack = raw_input("enter the packet number you want to send non awk on it: ")
+non_ack = 3
 server=Sender(int(win), float(tim), int(numpac), int(non_ack))
 server.soc.bind((host, port))
 server.soc.listen(8000)
