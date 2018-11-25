@@ -15,7 +15,8 @@ def hashing(data):
 
 
 class Sender:
-    def __init__(self, win_size, timeout, num_packets, non_ack=0):
+
+    def __init__(self, win_size, timeout, num_packets, nak_num):
         self.w = win_size
         self.t = timeout
         self.n = num_packets
@@ -28,7 +29,8 @@ class Sender:
         self.last_ack_seqnum = -1
         self.logfile = ''
         self.flag = 0
-        self.non_ack = non_ack
+        self.nak_num = nak_num
+
 
     def canAdd(self):  # check if a packet can be added to the send window
         if self.active_spaces == 0:
@@ -66,16 +68,16 @@ class Sender:
 
     def resend(self):  # function to resend packet if lost
         cur_num = 0
-        while cur_num < self.w - self.active_spaces:
-            print "Resending: ", str(self.window[cur_num].split('::')[1])
-            self.logfile.write(str(self.window[cur_num].split('::')[1]) + " Re-sending\n")
-            time.sleep(1.4)
-            temp = self.window[cur_num].split('::')
-            self.window[cur_num] = temp[0] + '::' + temp[1] + '::' + temp[2] + '::' + temp[3] + '::' + str(random.randint(70,100))
-            print self.window[cur_num].split('::')[1], self.window[cur_num].split('::')[3]
+        # while cur_num < self.w - self.active_spaces:
+        print "Resending: ", str(self.window[cur_num].split('::')[1])
+        self.logfile.write(str(self.window[cur_num].split('::')[1]) + " Re-sending\n")
+        time.sleep(1.4)
+        temp = self.window[cur_num].split('::')
+        self.window[cur_num] = temp[0] + '::' + temp[1] + '::' + temp[2] + '::' + temp[3] + '::' + str(random.randint(70,100))
+        print self.window[cur_num].split('::')[1], self.window[cur_num].split('::')[3]
 
-            conn.send(self.window[cur_num])
-            cur_num += 1
+        conn.send(self.window[cur_num])
+        cur_num += 1
 
     def makePack(self, num, pac):  # Create a packet
         sequence_number = num
@@ -85,16 +87,11 @@ class Sender:
         packet = str(file_check_sum) + '::' + str(sequence_number) + \
                      '::' + str(pack_size) + '::' + \
                                    str(pac) + '::' + str('90')
-        # if self.flag == 0:
-        #     self.flag = 1
-        #     packet = str(file_check_sum) + '::' + str(sequence_number) + \
-        #                  '::' + str(pack_size) + '::' + \
-        #                                str(pac) + '::' + str('50')
-        if self.non_ack == sequence_number:
-            self.non_ack = 1111111
+        if self.nak_num == sequence_number:
+            self.nak_num = 111111111
             packet = str(file_check_sum) + '::' + str(sequence_number) + \
-                        '::' + str(pack_size) + '::' + \
-                                      str(pac) + '::' + str('50')
+                         '::' + str(pack_size) + '::' + \
+                                       str(pac) + '::' + str('50')
         return packet
 
     def form_pack(self, data, num):  # create packets from datas
@@ -163,7 +160,7 @@ tim = 1
 non_ack = raw_input("enter the packet number you want to send non awk on it: ")
 server=Sender(int(win), float(tim), int(numpac), int(non_ack))
 server.soc.bind((host, port))
-server.soc.listen(5)
+server.soc.listen(8000)
 conn, addr=server.soc.accept()
 data = conn.recv(1024)
 print "recieved connection"
