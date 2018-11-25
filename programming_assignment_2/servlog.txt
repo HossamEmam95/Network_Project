@@ -1,0 +1,24 @@
+0 Sending
+1 Sending
+2 Sending
+3 Sending
+recieved: 0 :: NAK
+0 Re-sending
+1 Re-sending
+2 Re-sending
+3 Re-sending
+recieved: 0 :: ACK
+4 Sending
+recieved: 4 :: ACK
+5 Sending
+6 Sending
+7 Sending
+8 Sending
+recieved: 6 :: ACK
+9 Sending
+recieved: 7 :: ACK
+10 Sending
+11 Sending
+recieved: 9 :: ACK
+recieved: 10 :: ACK
+recieved: 11 :: ACK
