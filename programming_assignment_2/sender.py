@@ -38,9 +38,9 @@ class Sender:
     def sendPack(self, pack):  # function to send the packet through the socket
         time.sleep(1.5)
         conn.send(pack)
-        print "Sending packet No.", int(pack.split('/////')[1])
+        print "Sending packet No.", int(pack.split('::')[1])
         self.logfile.write(time.ctime(time.time()) + "\t" +
-                           str(pack.split('/////')[1]) + "Sending\n")
+                           str(pack.split('::')[1]) + "Sending\n")
 
     def add(self, pack):  # add a packet to the send window
         self.last_sent_seqnum = self.cur_seq
@@ -52,13 +52,13 @@ class Sender:
     def resend(self):  # function to resend packet if lost
         cur_num = 0
         while cur_num < self.w - self.active_spaces:
-            print "Resending: ", str(self.window[cur_num].split('/////')[1])
+            print "Resending: ", str(self.window[cur_num].split('::')[1])
             self.logfile.write(time.ctime(
-                time.time()) + "\t" + str(self.window[cur_num].split('/////')[1]) + "Re-sending\n")
+                time.time()) + "\t" + str(self.window[cur_num].split('::')[1]) + "Re-sending\n")
             time.sleep(1.4)
-            temp = self.window[cur_num].split('/////')
-            self.window[cur_num] = temp[0] + '/////' + temp[1] + '/////' + temp[2] + '/////' + temp[3] + '/////' + str(random.randint(70,100))
-            print self.window[cur_num].split('/////')
+            temp = self.window[cur_num].split('::')
+            self.window[cur_num] = temp[0] + '::' + temp[1] + '::' + temp[2] + '::' + temp[3] + '::' + str(random.randint(70,100))
+            print self.window[cur_num].split('::')
 
             conn.send(self.window[cur_num])
             cur_num += 1
@@ -68,9 +68,9 @@ class Sender:
         file_check_sum = check_sum(pac)
         pack_size = len(pac)
         prob = random.randint(0, 100)
-        packet = str(file_check_sum) + '/////' + str(sequence_number) + \
-                     '/////' + str(pack_size) + '/////' + \
-                                   str(pac) + '/////' + str(prob)
+        packet = str(file_check_sum) + '::' + str(sequence_number) + \
+                     '::' + str(pack_size) + '::' + \
+                                   str(pac) + '::' + str(prob)
         return packet
 
     def divide(self, data, num):  # create packets from datas
@@ -83,30 +83,30 @@ class Sender:
     def acc_Acks(self):  # check if all the sent packets have been ACKed
         try:
             packet = conn.recv(1024)
-            print packet.split('/////')
+            print packet.split('::')
         except:
             print 'Connection lost due to timeout!'
             self.logfile.write(time.ctime(time.time()) + "\t" + str(self.last_ack_seqnum + 1) + "Lost TImeout")
             return 0
-        if packet.split('/////')[2] == "NAK":
+        if packet.split('::')[2] == "Not_Ack":
             return 0
-        print "Recieved Ack number: ", packet.split('/////')[1]
+        print "Recieved Ack number: ", packet.split('::')[1]
         print "\n"
-        if int(packet.split('/////')[1]) == self.last_ack_seqnum + 1:
-            self.last_ack_seqnum = int(packet.split('/////')[1])
+        if int(packet.split('::')[1]) == self.last_ack_seqnum + 1:
+            self.last_ack_seqnum = int(packet.split('::')[1])
             self.window.pop(0)
             self.window.append(None)
             self.active_spaces += 1
             return 1
 
-        elif int(packet.split('/////')[1]) > self.last_ack_seqnum + 1:
+        elif int(packet.split('::')[1]) > self.last_ack_seqnum + 1:
             k = self.last_ack_seqnum
-            while(k < int(packet.split('/////')[1])):
+            while(k < int(packet.split('::')[1])):
                 self.window.pop(0)
                 self.window.append(None)
                 self.active_spaces += 1
                 k = k + 1
-            self.last_ack_seqnum = int(packet.split('/////')[1])
+            self.last_ack_seqnum = int(packet.split('::')[1])
             return 1
 
         else:
@@ -119,7 +119,7 @@ class Sender:
             while self.canAdd() and cur_pack != length:
                 pack = self.makePack(cur_pack, pack_list[cur_pack])
                 cur_pack = cur_pack + 1
-                print pack.split('/////')
+                print pack.split('::')
                 self.add(pack)
             print "\n"
             #print "wwaaaaattt"
@@ -154,7 +154,7 @@ server.soc.listen(5)
 conn, addr=server.soc.accept()
 data = conn.recv(1024)
 print "recieved connection"
-conn.send(str(win) + "/////" + str(tim) + "/////" + "sample.txt")
+conn.send(str(win) + "::" + str(tim) + "::" + "sample.txt")
 conn.close()
 server.soc.settimeout(5)
 conn, addr = server.soc.accept()
