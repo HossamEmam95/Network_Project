@@ -2,23 +2,28 @@
 1 Sending
 2 Sending
 3 Sending
-recieved: 0 :: NAK
-0 Re-sending
-1 Re-sending
-2 Re-sending
-3 Re-sending
-recieved: 0 :: ACK
+recieved: 1 :: ACK
 4 Sending
-recieved: 4 :: ACK
+recieved: 2 :: ACK
 5 Sending
 6 Sending
+recieved: 4 :: ACK
 7 Sending
+recieved: 5 :: ACK
 8 Sending
-recieved: 6 :: ACK
 9 Sending
-recieved: 7 :: ACK
+recieved: 6 :: ACK
 10 Sending
+recieved: 7 :: NAK
+7 Re-sending
+8 Re-sending
+9 Re-sending
+10 Re-sending
+recieved: 7 :: NAK
+7 Re-sending
+8 Re-sending
+9 Re-sending
+10 Re-sending
+recieved: 7 :: ACK
 11 Sending
-recieved: 9 :: ACK
-recieved: 10 :: ACK
 recieved: 11 :: ACK

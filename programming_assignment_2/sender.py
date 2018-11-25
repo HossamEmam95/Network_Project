@@ -15,8 +15,7 @@ def hashing(data):
 
 
 class Sender:
-
-    def __init__(self, win_size, timeout, num_packets):
+    def __init__(self, win_size, timeout, num_packets, non_ack=0):
         self.w = win_size
         self.t = timeout
         self.n = num_packets
@@ -29,6 +28,7 @@ class Sender:
         self.last_ack_seqnum = -1
         self.logfile = ''
         self.flag = 0
+        self.non_ack = non_ack
 
     def canAdd(self):  # check if a packet can be added to the send window
         if self.active_spaces == 0:
@@ -85,11 +85,16 @@ class Sender:
         packet = str(file_check_sum) + '::' + str(sequence_number) + \
                      '::' + str(pack_size) + '::' + \
                                    str(pac) + '::' + str('90')
-        if self.flag == 0:
-            self.flag = 1
+        # if self.flag == 0:
+        #     self.flag = 1
+        #     packet = str(file_check_sum) + '::' + str(sequence_number) + \
+        #                  '::' + str(pack_size) + '::' + \
+        #                                str(pac) + '::' + str('50')
+        if self.non_ack == sequence_number:
+            self.non_ack = 1111111
             packet = str(file_check_sum) + '::' + str(sequence_number) + \
-                         '::' + str(pack_size) + '::' + \
-                                       str(pac) + '::' + str('50')
+                        '::' + str(pack_size) + '::' + \
+                                      str(pac) + '::' + str('50')
         return packet
 
     def form_pack(self, data, num):  # create packets from datas
@@ -156,7 +161,7 @@ win = 4
 numpac = 8
 tim = 1
 non_ack = raw_input("enter the packet number you want to send non awk on it: ")
-server=Sender(int(win), float(tim), int(numpac))
+server=Sender(int(win), float(tim), int(numpac), int(non_ack))
 server.soc.bind((host, port))
 server.soc.listen(5)
 conn, addr=server.soc.accept()
